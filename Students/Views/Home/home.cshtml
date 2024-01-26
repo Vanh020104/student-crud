@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Students.Models.Student>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .student-img {
+            max-width: 50px;
+            max-height: 50px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2>Student List</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Group</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Comment</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td>@student.Group</td>
+                        <td>@student.Id</td>
+                        <td>@student.Fullname</td>
+                        <td>
+                            <label>
+                                <input type="checkbox" name="status_@(student.Id)" value="Active" checked> Active
+                            </label>
+                            <label>
+                                <input type="checkbox" name="status_@(student.Id)" value="Inactive"> Inactive
+                            </label>
+                        </td>
+                        
+                        <td><input type="text" name="comment_@(student.Id)" value="@student.Comment"></td>
+                        <td><img src="@student.Thumbnail" alt="@student.Fullname" class="student-img"></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+</body>
+</html>
